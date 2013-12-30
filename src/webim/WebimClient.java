@@ -328,10 +328,7 @@ public class WebimClient {
 		try {
 			String body = httpost("/group/join", data);
 			JSONObject respObj = new JSONObject(body);
-			JSONObject rtObj = new JSONObject();
-			rtObj.put("id", grpid);
-			rtObj.put("count", respObj.getInt(grpid)); 
-			return rtObj;
+			return respObj;
 		} catch (WebimException e) {
 			throw e;
 		} catch (Exception e) {
@@ -437,7 +434,7 @@ public class WebimClient {
 			while ((line = rd.readLine()) != null) {
 				response.append(line);
 			}
-			System.out.println(response.toString());
+			//System.out.println(response.toString());
 		} finally {
 			if(rd != null) rd.close();
 		}
