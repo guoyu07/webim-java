@@ -43,6 +43,8 @@ import java.util.Iterator;
  * <li>online: 通知消息服务器用户上线</li>
  * <li>online: 通知消息服务器用户下线</li>
  * <li>publish: 向消息服务器转发Presence、Status、Message</li>
+ * <li>push: 直接向消息服务器推送消息，无需先登录获取Ticket</li>
+ * <li>presences: 获取多用户的现场(Presence)</li>
  * <li>members: 向消息服务器获取群组当前在线用户表</li>
  * <li>join: 通知消息服务器有用户加入群组</li>
  * <li>leave: 通知消息服务器有用户离开群组</li>
@@ -226,9 +228,9 @@ public class WebimClient {
 	}
 
 	/**
-	 * 向消息服务器转发聊天消息(Message)
+	 * 向消息服务器转发即时消息(Message)
 	 * 
-	 * @param message 聊天消息
+	 * @param message 即时消息
 	 * @return JSONObject "{'status': 'ok'}" or "{'status': 'error', 'message': 'blabla'}"
 	 * @throws WebimException
 	 */
@@ -247,9 +249,9 @@ public class WebimClient {
 	}
 	
 	/**
-	 * 向消息服务器直接推送即时消息(Message)，无需要online获取ticket。
+	 * 向消息服务器直接推送即时消息(Message)，无需登录获取ticket。
 	 * 
-	 * @param message 聊天消息
+	 * @param message 即时消息
 	 * @return JSONObject "{'status': 'ok'}" or "{'status': 'error', 'message': 'blabla'}"
 	 * @throws WebimException
 	 */
