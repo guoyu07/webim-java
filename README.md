@@ -1,6 +1,8 @@
 webim-java
 ==========
 
-webim java sdk
+webim java sdk 5.2
+
+详见javadoc
 
 
