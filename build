@@ -1,0 +1,4 @@
+#!/bin/sh
+
+jar cfm dist/webim-5.2.jar MANIFEST.MF -C bin/ .
+
