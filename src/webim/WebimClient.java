@@ -38,16 +38,16 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 /**
- * WebimClientÊÇÓëÏûÏ¢·şÎñÆ÷Í¨ĞÅ½Ó¿Ú£¬²ÉÓÃJSON/HTTPĞ­ÒéÉè¼Æ£¬½Ó¿Ú°üÀ¨:<br>
+ * WebimClientæ˜¯ä¸æ¶ˆæ¯æœåŠ¡å™¨é€šä¿¡æ¥å£ï¼Œé‡‡ç”¨JSON/HTTPåè®®è®¾è®¡ï¼Œæ¥å£åŒ…æ‹¬:<br>
  * <ul>
- * <li>online: Í¨ÖªÏûÏ¢·şÎñÆ÷ÓÃ»§ÉÏÏß</li>
- * <li>online: Í¨ÖªÏûÏ¢·şÎñÆ÷ÓÃ»§ÏÂÏß</li>
- * <li>publish: ÏòÏûÏ¢·şÎñÆ÷×ª·¢Presence¡¢Status¡¢Message</li>
- * <li>push: Ö±½ÓÏòÏûÏ¢·şÎñÆ÷ÍÆËÍÏûÏ¢£¬ÎŞĞèÏÈµÇÂ¼»ñÈ¡Ticket</li>
- * <li>presences: »ñÈ¡¶àÓÃ»§µÄÏÖ³¡(Presence)</li>
- * <li>members: ÏòÏûÏ¢·şÎñÆ÷»ñÈ¡Èº×éµ±Ç°ÔÚÏßÓÃ»§±í</li>
- * <li>join: Í¨ÖªÏûÏ¢·şÎñÆ÷ÓĞÓÃ»§¼ÓÈëÈº×é</li>
- * <li>leave: Í¨ÖªÏûÏ¢·şÎñÆ÷ÓĞÓÃ»§Àë¿ªÈº×é</li>
+ * <li>online: é€šçŸ¥æ¶ˆæ¯æœåŠ¡å™¨ç”¨æˆ·ä¸Šçº¿</li>
+ * <li>online: é€šçŸ¥æ¶ˆæ¯æœåŠ¡å™¨ç”¨æˆ·ä¸‹çº¿</li>
+ * <li>publish: å‘æ¶ˆæ¯æœåŠ¡å™¨è½¬å‘Presenceã€Statusã€Message</li>
+ * <li>push: ç›´æ¥å‘æ¶ˆæ¯æœåŠ¡å™¨æ¨é€æ¶ˆæ¯ï¼Œæ— éœ€å…ˆç™»å½•è·å–Ticket</li>
+ * <li>presences: è·å–å¤šç”¨æˆ·çš„ç°åœº(Presence)</li>
+ * <li>members: å‘æ¶ˆæ¯æœåŠ¡å™¨è·å–ç¾¤ç»„å½“å‰åœ¨çº¿ç”¨æˆ·è¡¨</li>
+ * <li>join: é€šçŸ¥æ¶ˆæ¯æœåŠ¡å™¨æœ‰ç”¨æˆ·åŠ å…¥ç¾¤ç»„</li>
+ * <li>leave: é€šçŸ¥æ¶ˆæ¯æœåŠ¡å™¨æœ‰ç”¨æˆ·ç¦»å¼€ç¾¤ç»„</li>
  * </ul>
  * 
  * @author Ery Lee <ery.lee @ gmail.com>
@@ -56,47 +56,47 @@ import java.util.Iterator;
 public class WebimClient {
 
 	/**
-	 * Ğ­Òé°æ±¾ºÅ
+	 * åè®®ç‰ˆæœ¬å·
 	 */
 	public static String APIVSN = "v5";
 
 	/**
-	 * µ±Ç°¶Ëµã(ÓÃ»§)
+	 * å½“å‰ç«¯ç‚¹(ç”¨æˆ·)
 	 */
 	private WebimEndpoint ep;
 	
 	/**
-	 * Õ¾µãÓòÃû
+	 * ç«™ç‚¹åŸŸå
 	 */
 	private String domain;
 
 	/**
-	 * ÏûÏ¢·şÎñÆ÷Í¨ĞÅAPIKEY
+	 * æ¶ˆæ¯æœåŠ¡å™¨é€šä¿¡APIKEY
 	 */
 	private String apikey;
 	
 	/**
-	 * ÏûÏ¢·şÎñÆ÷ÄÚ²¿Í¨ĞÅµØÖ·
+	 * æ¶ˆæ¯æœåŠ¡å™¨å†…éƒ¨é€šä¿¡åœ°å€
 	 */
 	private String host;
 
 	/**
-	 * ÏûÏ¢·şÎñÆ÷¶Ë¿Ú
+	 * æ¶ˆæ¯æœåŠ¡å™¨ç«¯å£
 	 */
 	private int port;
 
 	/**
-	 * Í¨ĞÅÁîÅÆ£¬Ã¿onlineÒ»´Î£¬ÏûÏ¢·şÎñÆ÷·µ»ØÒ»¸öĞÂÁîÅÆ
+	 * é€šä¿¡ä»¤ç‰Œï¼Œæ¯onlineä¸€æ¬¡ï¼Œæ¶ˆæ¯æœåŠ¡å™¨è¿”å›ä¸€ä¸ªæ–°ä»¤ç‰Œ
 	 */
 	private String ticket = null;
 
 	/**
-	 * ´´½¨CliengÊµÀı
-	 * @param ep µ±Ç°¶Ëµã
-	 * @param domain ÓòÃû
+	 * åˆ›å»ºCliengå®ä¾‹
+	 * @param ep å½“å‰ç«¯ç‚¹
+	 * @param domain åŸŸå
 	 * @param apikey APIKEY
-	 * @param host ÏûÏ¢·şÎñÆ÷µØÖ·
-	 * @param port ÏûÏ¢·şÎñÆ÷¶Ë¿Ú
+	 * @param host æ¶ˆæ¯æœåŠ¡å™¨åœ°å€
+	 * @param port æ¶ˆæ¯æœåŠ¡å™¨ç«¯å£
 	 */
 	public WebimClient(WebimEndpoint ep, String domain, String apikey, String host, int port) {
 		this.ep = ep;
@@ -107,22 +107,22 @@ public class WebimClient {
 	}
 
 	/**
-	 * ÉèÖÃÓëÏûÏ¢·şÎñÆ÷Í¨ĞÅÁîÅÆ
+	 * è®¾ç½®ä¸æ¶ˆæ¯æœåŠ¡å™¨é€šä¿¡ä»¤ç‰Œ
 	 * 
-	 * @param ticket Í¨ĞÅÁîÅÆ
+	 * @param ticket é€šä¿¡ä»¤ç‰Œ
 	 */
 	public void setTicket(String ticket) {
 		this.ticket = ticket;
 	}
 
 	/**
-	 * Í¨ÖªÏûÏ¢·şÎñÆ÷ÓÃ»§ÉÏÏß
+	 * é€šçŸ¥æ¶ˆæ¯æœåŠ¡å™¨ç”¨æˆ·ä¸Šçº¿
 	 * 
-	 * @param buddies ÓÃ»§ºÃÓÑidÁĞ±í
-	 * @param groups ÓÃ»§Èº×éidÁĞ±í
+	 * @param buddies ç”¨æˆ·å¥½å‹idåˆ—è¡¨
+	 * @param groups ç”¨æˆ·ç¾¤ç»„idåˆ—è¡¨
 	 * 
-	 * @return JSONObject ³É¹¦·µ»ØJSON¶ÔÏó
-	 * @throws WebimException Ê§°Ü·µ»ØÒì³£
+	 * @return JSONObject æˆåŠŸè¿”å›JSONå¯¹è±¡
+	 * @throws WebimException å¤±è´¥è¿”å›å¼‚å¸¸
 	 */
 	public JSONObject online(List<String> buddies, List<String> groups)
 			throws WebimException {
@@ -147,7 +147,7 @@ public class WebimClient {
 	}
 
 	/**
-	 * ÓòÃû
+	 * åŸŸå
 	 * 
 	 * @return Domain
 	 */
@@ -156,7 +156,7 @@ public class WebimClient {
 	}
 
 	/**
-	 * ¶Ëµã
+	 * ç«¯ç‚¹
 	 * @return Endpoint
 	 */
 	public WebimEndpoint getEndpoint() {
@@ -164,7 +164,7 @@ public class WebimClient {
 	}
 	
 	/**
-	 * Í¨ÖªÏûÏ¢·şÎñÆ÷ÏÂÏß
+	 * é€šçŸ¥æ¶ˆæ¯æœåŠ¡å™¨ä¸‹çº¿
 	 * 
 	 * @return JSONObject "{'status': 'ok'}" or "{'status': 'error', 'message': 'blabla'}"
 	 * @throws WebimException
@@ -184,9 +184,9 @@ public class WebimClient {
 	}
 
 	/**
-	 * ÏòÏûÏ¢·şÎñÆ÷×ª·¢ÏÖ³¡(Presence)
+	 * å‘æ¶ˆæ¯æœåŠ¡å™¨è½¬å‘ç°åœº(Presence)
 	 *  
-	 * @param presence ÏÖ³¡
+	 * @param presence ç°åœº
 	 * @return JSONObject "{'status': 'ok'}" or "{'status': 'error', 'message': 'blabla'}"
 	 * @throws WebimException
 	 */
@@ -206,9 +206,9 @@ public class WebimClient {
 	}
 
 	/**
-	 * ÏòÏûÏ¢·şÎñÆ÷×ª·¢×´Ì¬(Status)
+	 * å‘æ¶ˆæ¯æœåŠ¡å™¨è½¬å‘çŠ¶æ€(Status)
 	 * 
-	 * @param status ×´Ì¬
+	 * @param status çŠ¶æ€
 	 * @return JSONObject "{'status': 'ok'}" or "{'status': 'error', 'message': 'blabla'}"
 	 * @throws WebimException
 	 */
@@ -228,9 +228,9 @@ public class WebimClient {
 	}
 
 	/**
-	 * ÏòÏûÏ¢·şÎñÆ÷×ª·¢¼´Ê±ÏûÏ¢(Message)
+	 * å‘æ¶ˆæ¯æœåŠ¡å™¨è½¬å‘å³æ—¶æ¶ˆæ¯(Message)
 	 * 
-	 * @param message ¼´Ê±ÏûÏ¢
+	 * @param message å³æ—¶æ¶ˆæ¯
 	 * @return JSONObject "{'status': 'ok'}" or "{'status': 'error', 'message': 'blabla'}"
 	 * @throws WebimException
 	 */
@@ -249,9 +249,9 @@ public class WebimClient {
 	}
 	
 	/**
-	 * ÏòÏûÏ¢·şÎñÆ÷Ö±½ÓÍÆËÍ¼´Ê±ÏûÏ¢(Message)£¬ÎŞĞèµÇÂ¼»ñÈ¡ticket¡£
+	 * å‘æ¶ˆæ¯æœåŠ¡å™¨ç›´æ¥æ¨é€å³æ—¶æ¶ˆæ¯(Message)ï¼Œæ— éœ€ç™»å½•è·å–ticketã€‚
 	 * 
-	 * @param message ¼´Ê±ÏûÏ¢
+	 * @param message å³æ—¶æ¶ˆæ¯
 	 * @return JSONObject "{'status': 'ok'}" or "{'status': 'error', 'message': 'blabla'}"
 	 * @throws WebimException
 	 */
@@ -271,10 +271,10 @@ public class WebimClient {
 	}
 
 	/**
-	 * ´ÓÏûÏ¢·şÎñÆ÷¶ÁÈ¡¶à¶àÓÃ»§ÏÖ³¡(Presence)ĞÅÏ¢
+	 * ä»æ¶ˆæ¯æœåŠ¡å™¨è¯»å–å¤šå¤šç”¨æˆ·ç°åœº(Presence)ä¿¡æ¯
 	 * 
-	 * @param ids ÓÃ»§idÁĞ±í
-	 * @return JsonObject¶ÔÏó£¬Àı×Ó:
+	 * @param ids ç”¨æˆ·idåˆ—è¡¨
+	 * @return JsonObjectå¯¹è±¡ï¼Œä¾‹å­:
 	 *     {"uid1": "available", "uid2": "away"}
 	 * 
 	 * @exception WebimException
@@ -294,10 +294,10 @@ public class WebimClient {
 	}
 	
 	/**
-	 * ÏòÏûÏ¢·şÎñÆ÷ÇëÇóÈº×éÔÚÏß³ÉÔ±ĞÅÏ¢
+	 * å‘æ¶ˆæ¯æœåŠ¡å™¨è¯·æ±‚ç¾¤ç»„åœ¨çº¿æˆå‘˜ä¿¡æ¯
 	 * 
-	 * @param grpid Èº×éid
-	 * @return member ³ÉÔ±ÁĞ±í
+	 * @param grpid ç¾¤ç»„id
+	 * @return member æˆå‘˜åˆ—è¡¨
 	 * @throws WebimException
 	 */
 	public JSONArray members(String grpid) throws WebimException {
@@ -315,9 +315,9 @@ public class WebimClient {
 	}
 
 	/**
-	 * Í¨ÖªÏûÏ¢·şÎñÆ÷ÓÃ»§¼ÓÈëÈº×é
+	 * é€šçŸ¥æ¶ˆæ¯æœåŠ¡å™¨ç”¨æˆ·åŠ å…¥ç¾¤ç»„
 	 * 
-	 * @param grpid Èº×éid
+	 * @param grpid ç¾¤ç»„id
 	 * @return JSONObject "{'id': grpid, 'count': '0'}"
 	 * @throws WebimException
 	 */
@@ -338,9 +338,9 @@ public class WebimClient {
 	}
 
 	/**
-	 * Í¨ÖªÏûÏ¢·şÎñÆ÷ÓÃ»§Àë¿ªÈº×é
+	 * é€šçŸ¥æ¶ˆæ¯æœåŠ¡å™¨ç”¨æˆ·ç¦»å¼€ç¾¤ç»„
 	 * 
-	 * @param grpid Èº×éid
+	 * @param grpid ç¾¤ç»„id
 	 * @return JSONObject "{'status': 'ok'}" or "{'status': 'error', 'message': 'blabla'}"
 	 * @throws WebimException
 	 */

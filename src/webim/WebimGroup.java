@@ -21,53 +21,55 @@
 package webim;
 
 /**
- * WebimÈº×é¶ÔÏó
+ * Webimç¾¤ç»„å¯¹è±¡
  * 
  * @author Ery Lee <ery.lee at gmail.com>
- * @since 1.0 
+ * @since 1.0
  */
 public class WebimGroup {
 
 	/**
-	 * Èº×éid
+	 * ç¾¤ç»„id
 	 */
 	private String id;
-	
+
 	/**
-	 * Èº×éêÇ³Æ
+	 * ç¾¤ç»„æ˜µç§°
 	 */
 	private String nick;
-	
+
 	/**
-	 * Èº×éÊ×Ò³
+	 * ç¾¤ç»„é¦–é¡µ
 	 */
 	private String url = "";
-	
+
 	/**
-	 * ÔÚÏß³ÉÔ±Í³¼Æ
+	 * åœ¨çº¿æˆå‘˜ç»Ÿè®¡
 	 */
 	private int count = 0;
-	
+
 	/**
-	 * È«²¿³ÉÔ±Í³¼Æ
+	 * å…¨éƒ¨æˆå‘˜ç»Ÿè®¡
 	 */
-	//private int all_count = 0;
-	
+	// private int all_count = 0;
+
 	/**
-	 * Èº×éÍ¼Æ¬
+	 * ç¾¤ç»„å›¾ç‰‡
 	 */
 	private String pic_url = "";
 
 	/**
-	 * ÊÇ·ñÁÙÊ±ÌÖÂÛ×é
+	 * æ˜¯å¦ä¸´æ—¶è®¨è®ºç»„
 	 */
 	private boolean temporary = false;
-	
+
 	/**
-	 * ´´½¨Èº×éÊµÀı
+	 * åˆ›å»ºç¾¤ç»„å®ä¾‹
 	 * 
-	 * @param id Èº×éid
-	 * @param nick Èº×éêÇ³Æ
+	 * @param id
+	 *            ç¾¤ç»„id
+	 * @param nick
+	 *            ç¾¤ç»„æ˜µç§°
 	 */
 	public WebimGroup(String id, String nick) {
 		this.id = id;
@@ -75,92 +77,104 @@ public class WebimGroup {
 	}
 
 	/**
-	 * Èº×éid
+	 * ç¾¤ç»„id
 	 * 
-	 * @return Èº×éid
+	 * @return ç¾¤ç»„id
 	 */
 	public String getId() {
 		return id;
 	}
 
 	/**
-	 * Èº×éêÇ³Æ
-	 * @return Èº×éêÇ³Æ
+	 * ç¾¤ç»„æ˜µç§°
+	 * 
+	 * @return ç¾¤ç»„æ˜µç§°
 	 */
 	public String getNick() {
 		return nick;
 	}
 
 	/**
-	 * ÉèÖÃÈº×éêÇ³Æ
-	 * @param nick Èº×éêÇ³Æ
+	 * è®¾ç½®ç¾¤ç»„æ˜µç§°
+	 * 
+	 * @param nick
+	 *            ç¾¤ç»„æ˜µç§°
 	 */
 	public void setNick(String nick) {
 		this.nick = nick;
 	}
 
 	/**
-	 * Èº×éÊ×Ò³
-	 * @return Èº×éÊ×Ò³
+	 * ç¾¤ç»„é¦–é¡µ
+	 * 
+	 * @return ç¾¤ç»„é¦–é¡µ
 	 */
 	public String getUrl() {
 		return url;
 	}
 
 	/**
-	 * ÉèÖÃÈº×éÊ×Ò³
-	 * @param url Èº×éÊ×Ò³
+	 * è®¾ç½®ç¾¤ç»„é¦–é¡µ
+	 * 
+	 * @param url
+	 *            ç¾¤ç»„é¦–é¡µ
 	 */
 	public void setUrl(String url) {
 		this.url = url;
 	}
 
 	/**
-	 * Èº×é³ÉÔ±Í³¼Æ
-	 * @return Èº×é³ÉÔ±Í³¼Æ
+	 * ç¾¤ç»„æˆå‘˜ç»Ÿè®¡
+	 * 
+	 * @return ç¾¤ç»„æˆå‘˜ç»Ÿè®¡
 	 */
 	public int getCount() {
 		return count;
 	}
 
 	/**
-	 * ÉèÖÃÈº×é³ÉÔ±Í³¼Æ
-	 * @param count Èº×é³ÉÔ±Í³¼Æ
+	 * è®¾ç½®ç¾¤ç»„æˆå‘˜ç»Ÿè®¡
+	 * 
+	 * @param count
+	 *            ç¾¤ç»„æˆå‘˜ç»Ÿè®¡
 	 */
 	public void setCount(int count) {
 		this.count = count;
 	}
 
 	/**
-	 * Èº×éÔÚÏß³ÉÔ±Í³¼Æ
-	 * @return ÔÚÏß³ÉÔ±Í³¼Æ
+	 * ç¾¤ç»„åœ¨çº¿æˆå‘˜ç»Ÿè®¡
+	 * 
+	 * @return åœ¨çº¿æˆå‘˜ç»Ÿè®¡
 	 */
-	//public int getAll_count() {
-	//	return all_count;
-	//}
+	// public int getAll_count() {
+	// return all_count;
+	// }
 
 	/**
-	 * ÉèÖÃÈº×éÔÚÏß³ÉÔ±Í³¼Æ
+	 * è®¾ç½®ç¾¤ç»„åœ¨çº¿æˆå‘˜ç»Ÿè®¡
 	 * 
-	 * @param all_count ÔÚÏß³ÉÔ±Í³¼Æ
+	 * @param all_count
+	 *            åœ¨çº¿æˆå‘˜ç»Ÿè®¡
 	 */
-	//public void setAll_count(int all_count) {
-	//	this.all_count = all_count;
-	//}
+	// public void setAll_count(int all_count) {
+	// this.all_count = all_count;
+	// }
 
 	/**
-	 * Èº×éÍ¼Æ¬
+	 * ç¾¤ç»„å›¾ç‰‡
 	 * 
-	 * @return Èº×éÍ¼Æ¬
+	 * @return ç¾¤ç»„å›¾ç‰‡
 	 */
 	public String getPic_url() {
 		return pic_url;
 	}
 
 	/**
-	 * ÉèÖÃÈº×éÍ¼Æ¬
+	 * è®¾ç½®ç¾¤ç»„å›¾ç‰‡
 	 * 
-	 * @param pic_url Èº×éÍ¼Æ¬
+	 * @param pic_url
+	 *            ç¾¤ç»„å›¾ç‰‡
 	 */
 	public void setPic_url(String pic_url) {
 		this.pic_url = pic_url;

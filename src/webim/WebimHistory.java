@@ -48,7 +48,7 @@ package webim;
 import java.util.Date;
 
 /**
- * Webim历史消息
+ * Webim鍘嗗彶娑堟伅
  * 
  * @author Ery Lee <ery.lee @ gmail.com>
  * @since 1.0

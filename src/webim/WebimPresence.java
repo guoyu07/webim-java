@@ -23,7 +23,7 @@ package webim;
 import java.util.Map;
 
 /**
- * Webim�ֳ�״̬
+ * Webim现场
  * 
  * @author Ery Lee <ery.lee @ gmail.com>
  * @since 1.0 

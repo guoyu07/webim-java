@@ -23,7 +23,7 @@ package webim;
 import java.util.Map;
 
 /**
- * Webim用户状态，比如"正在输入..."
+ * Webim鐘舵�侊紝渚嬪鐢ㄦ埛姝ｅ湪杈撳叆
  * 
  * @author Ery Lee <ery.lee @ gmail.com>
  * @since 1.0 

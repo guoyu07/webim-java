@@ -21,8 +21,8 @@
 package webim;
 
 /**
- * Webim²Ëµ¥Ìõ£¬ÏÔÊ¾ÔÚÏÂÃæÌõ·ùÓÒ²à¡£
- * 
+ * Webimèœå•æ¡ï¼Œæ˜¾ç¤ºåœ¨ä¸‹é¢æ¡å¹…å³ä¾§ã€‚
+ *  
  * @author Ery Lee <ery.lee at gmail.com>
  * @since 1.0
  */

@@ -22,7 +22,7 @@
 package webim;
 
 /**
- * Â·ÓÉ¶Ëµã(ÓÃ»§)¡£¼´Ê±ÏûÏ¢Â·ÓÉ¶Ëµã£¬±êÊ¶Ò»¸öÓÃ»§¡¢·Ã¿Í¡¢·şÎñ¡£
+ * è·¯ç”±ç«¯ç‚¹(ç”¨æˆ·)ã€‚å³æ—¶æ¶ˆæ¯è·¯ç”±ç«¯ç‚¹ï¼Œæ ‡è¯†ä¸€ä¸ªç”¨æˆ·ã€è®¿å®¢ã€æœåŠ¡ã€‚
  * 
  * @author Ery Lee <ery.lee at gmail.com>
  * @since 1.0
@@ -30,65 +30,69 @@ package webim;
 public class WebimEndpoint {
 
 	/**
-	 * ¶Ëµã±êÊ¶£¬´«µİ¸øÏûÏ¢·şÎñÆ÷Ê±£¬×÷Îªname(ÀúÊ·Ô­Òò)
+	 * ç«¯ç‚¹æ ‡è¯†ï¼Œä¼ é€’ç»™æ¶ˆæ¯æœåŠ¡å™¨æ—¶ï¼Œä½œä¸ºname(å†å²åŸå› )
 	 */
 	private String id;
 
 	/**
-	 *¶Ëµã(ÓÃ»§)êÇ³Æ
+	 * ç«¯ç‚¹(ç”¨æˆ·)æ˜µç§°
 	 */
 	private String nick;
-	
+
+	// private String presence = "online";
 	/**
-	 * ÏÖ³¡
+	 * ç°åœº
 	 */
 	private String show = "unavailable";
-	
+
 	/**
-	 * ×´Ì¬×î½ü¸üĞÂÊ±¼ä
+	 * çŠ¶æ€æœ€è¿‘æ›´æ–°æ—¶é—´
 	 */
 	private String status_time = "";
-	
+
 	/**
-	 * ¶Ëµã(ÓÃ»§)Ö÷Ò³
+	 * ç«¯ç‚¹(ç”¨æˆ·)ä¸»é¡µ
 	 */
 	private String url = "";
-	
+
 	/**
-	 * ¶Ëµã(ÓÃ»§)Í¼Æ¬
+	 * ç«¯ç‚¹(ç”¨æˆ·)å›¾ç‰‡
 	 */
 	private String pic_url = "";
-	
+
 	/**
-	 * ¶Ëµã×´Ì¬
+	 * ç«¯ç‚¹çŠ¶æ€
 	 */
 	private String status = "Offline";
 
 	/**
-	 * ´´½¨¶Ëµã¶ÔÏó
-	 * @param id ¶Ëµã±êÊ¶(ÓÃ»§Ãû)
-	 * @param nick ¶ËµãêÇ³Æ(ÓÃ»§êÇ³Æ)
+	 * åˆ›å»ºç«¯ç‚¹å¯¹è±¡
+	 * 
+	 * @param id
+	 *            ç«¯ç‚¹æ ‡è¯†(ç”¨æˆ·å)
+	 * @param nick
+	 *            ç«¯ç‚¹æ˜µç§°(ç”¨æˆ·æ˜µç§°)
 	 */
-	public WebimEndpoint(String id, String nick)
-    {
-        this.setId(id);
-        this.setNick(nick);
-        this.setStatus_time("");
-        this.setUrl("");
-        this.setPic_url("");
-    }
+	public WebimEndpoint(String id, String nick) {
+		this.setId(id);
+		this.setNick(nick);
+		this.setStatus_time("");
+		this.setUrl("");
+		this.setPic_url("");
+	}
 
 	/**
-	 * ¶ÁÈ¡¶Ëµã±êÊ¶£¬id»òname
-	 * @return id ¶Ëµã±êÊ¶
+	 * è¯»å–ç«¯ç‚¹æ ‡è¯†ï¼Œidæˆ–name
+	 * 
+	 * @return id ç«¯ç‚¹æ ‡è¯†
 	 */
 	public String getId() {
 		return id;
 	}
 
-	
 	/**
-	 * ÉèÖÃ¶Ëµã
+	 * è®¾ç½®ç«¯ç‚¹
+	 * 
 	 * @param id
 	 */
 	public void setId(String id) {
@@ -96,15 +100,16 @@ public class WebimEndpoint {
 	}
 
 	/**
-	 * ¶ÁÈ¡ÏÖ³¡
-	 * @return ÏÖ³¡×´Ì¬
+	 * è¯»å–ç°åœº
+	 * 
+	 * @return ç°åœºçŠ¶æ€
 	 */
 	public String getShow() {
 		return show;
 	}
 
 	/**
-	 * ÉèÖÃÏÖ³¡
+	 * è®¾ç½®ç°åœº
 	 * 
 	 * @param show
 	 */
@@ -113,15 +118,16 @@ public class WebimEndpoint {
 	}
 
 	/**
-	 * ¶ÁÈ¡×´Ì¬±ä¸üÊ±¼ä
-	 * @return ×´Ì¬±ä¸üÊ±¼ä
+	 * è¯»å–çŠ¶æ€å˜æ›´æ—¶é—´
+	 * 
+	 * @return çŠ¶æ€å˜æ›´æ—¶é—´
 	 */
 	public String getStatus_time() {
 		return status_time;
 	}
 
 	/**
-	 * ÉèÖÃ×´Ì¬±ä¸üÊ±¼ä
+	 * è®¾ç½®çŠ¶æ€å˜æ›´æ—¶é—´
 	 * 
 	 * @param status_time
 	 */
@@ -130,77 +136,84 @@ public class WebimEndpoint {
 	}
 
 	/**
-	 * ¶Ëµã(ÓÃ»§)Ö÷Ò³
+	 * ç«¯ç‚¹(ç”¨æˆ·)ä¸»é¡µ
 	 * 
-	 * @return url ¶Ëµã(ÓÃ»§)Ê×Ò³
+	 * @return url ç«¯ç‚¹(ç”¨æˆ·)é¦–é¡µ
 	 */
 	public String getUrl() {
 		return url;
 	}
 
 	/**
-	 * ÉèÖÃ¶Ëµã(ÓÃ»§)Ê×Ò³
+	 * è®¾ç½®ç«¯ç‚¹(ç”¨æˆ·)é¦–é¡µ
 	 * 
-	 * @param url ¶Ëµã(ÓÃ»§)Ê×Ò³
+	 * @param url
+	 *            ç«¯ç‚¹(ç”¨æˆ·)é¦–é¡µ
 	 */
 	public void setUrl(String url) {
 		this.url = url;
 	}
 
 	/**
-	 * ¶Ëµã(ÓÃ»§)Í¼Æ¬
+	 * ç«¯ç‚¹(ç”¨æˆ·)å›¾ç‰‡
 	 * 
-	 * @return ¶Ëµã(ÓÃ»§)Í¼Æ¬
+	 * @return ç«¯ç‚¹(ç”¨æˆ·)å›¾ç‰‡
 	 */
 	public String getPic_url() {
 		return pic_url;
 	}
 
 	/**
-	 * ÉèÖÃ¶Ëµã(ÓÃ»§)Í¼Æ¬
-	 * @param pic_url ¶Ëµã(ÓÃ»§)Í¼Æ¬
+	 * è®¾ç½®ç«¯ç‚¹(ç”¨æˆ·)å›¾ç‰‡
+	 * 
+	 * @param pic_url
+	 *            ç«¯ç‚¹(ç”¨æˆ·)å›¾ç‰‡
 	 */
 	public void setPic_url(String pic_url) {
 		this.pic_url = pic_url;
 	}
 
 	/**
-	 * ¶Ëµã(ÓÃ»§)×´Ì¬
-	 * @return status ¶Ëµã(ÓÃ»§)×´Ì¬
+	 * ç«¯ç‚¹(ç”¨æˆ·)çŠ¶æ€
+	 * 
+	 * @return status ç«¯ç‚¹(ç”¨æˆ·)çŠ¶æ€
 	 */
 	public String getStatus() {
 		return status;
 	}
-	
 
 	/**
-	 * ÉèÖÃ¶Ëµã(ÓÃ»§)×´Ì¬
-	 * @param status ÓÃ»§×´Ì¬
+	 * è®¾ç½®ç«¯ç‚¹(ç”¨æˆ·)çŠ¶æ€
+	 * 
+	 * @param status
+	 *            ç”¨æˆ·çŠ¶æ€
 	 */
 	public void setStatus(String status) {
 		this.status = status;
 	}
 
 	/**
-	 * ¶Ëµã(ÓÃ»§)êÇ³Æ
+	 * ç«¯ç‚¹(ç”¨æˆ·)æ˜µç§°
 	 * 
-	 * @return ¶Ëµã(ÓÃ»§)êÇ³Æ
+	 * @return ç«¯ç‚¹(ç”¨æˆ·)æ˜µç§°
 	 */
 	public String getNick() {
 		return nick;
 	}
 
 	/**
-	 * ÉèÖÃ¶Ëµã(ÓÃ»§)êÇ³Æ
+	 * è®¾ç½®ç«¯ç‚¹(ç”¨æˆ·)æ˜µç§°
 	 * 
-	 * @param nick ¶Ëµã(ÓÃ»§)êÇ³Æ
+	 * @param nick
+	 *            ç«¯ç‚¹(ç”¨æˆ·)æ˜µç§°
 	 */
 	public void setNick(String nick) {
 		this.nick = nick;
 	}
 
 	public String toString() {
-		return String.format("Endpoint(id=%s, nick=%s, show=%s", id, nick, show);
+		return String
+				.format("Endpoint(id=%s, nick=%s, show=%s", id, nick, show);
 	}
 
 }
