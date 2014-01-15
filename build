@@ -1,4 +1,6 @@
 #!/bin/sh
 
-jar cfm dist/webim-5.2.jar MANIFEST.MF -C bin/ .
+date=`date +"%Y%m%d"`
+
+jar cfm dist/webim-5.2-$date.jar MANIFEST.MF -C bin/ .
 
