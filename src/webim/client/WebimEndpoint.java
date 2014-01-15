@@ -19,7 +19,7 @@
  * under the License.
  */
 
-package webim;
+package webim.client;
 
 /**
  * 路由端点(用户)。即时消息路由端点，标识一个用户、访客、服务。
@@ -39,7 +39,11 @@ public class WebimEndpoint {
 	 */
 	private String nick;
 
-	// private String presence = "online";
+	/**
+	 * offline | online
+	 */
+	private String presence = "offline";
+
 	/**
 	 * 现场
 	 */
@@ -63,7 +67,7 @@ public class WebimEndpoint {
 	/**
 	 * 端点状态
 	 */
-	private String status = "Offline";
+	private String status = "";
 
 	/**
 	 * 创建端点对象
@@ -212,8 +216,16 @@ public class WebimEndpoint {
 	}
 
 	public String toString() {
-		return String
-				.format("Endpoint(id=%s, nick=%s, show=%s", id, nick, show);
+		return String.format("Endpoint(id=%s, nick=%s, presence=%s, show=%s",
+				id, nick, presence, show);
+	}
+
+	public String getPresence() {
+		return presence;
+	}
+
+	public void setPresence(String presence) {
+		this.presence = presence;
 	}
 
 }

@@ -1,5 +1,5 @@
 /*
- * WebimPresence.java
+ * WebimStatus.java
  *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -18,32 +18,37 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package webim;
+package webim.client;
 
 import java.util.Map;
 
 /**
- * Webim现场
+ * Webim状态，例如用户正在输入
  * 
  * @author Ery Lee <ery.lee @ gmail.com>
  * @since 1.0 
  */
-public class WebimPresence {
+public class WebimStatus {
 
+	private String to;
 	private String show;
-	
-	private String status = "";
+	private String status;
 
-	public WebimPresence() {
+	public WebimStatus() {
 	}
 	
-	public WebimPresence(String show) {
-		this.show = show;
+	public WebimStatus(String to, String show, String status) {
+		this.setTo(to);
+		this.setShow(show);
+		this.setStatus(status);
 	}
-	
-	public WebimPresence(String show, String status) {
-		this.show = show;
-		this.status = status;
+
+	public String getTo() {
+		return to;
+	}
+
+	public void setTo(String to) {
+		this.to = to;
 	}
 
 	public String getShow() {
@@ -63,12 +68,13 @@ public class WebimPresence {
 	}
 
 	public void feed(Map<String, String> data) {
+		data.put("to", to);
 		data.put("show", show);
 		data.put("status", status);
 	}
 
 	public String toString() {
-		return String.format("Presence(show=%s, status=%s)", show, status);
+		return String.format("Status(to=%s, show=%s, status=%s)", to, show, status);
 	}
 	
 }

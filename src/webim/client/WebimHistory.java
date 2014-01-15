@@ -19,7 +19,7 @@
  * under the License.
  */
 
-package webim;
+package webim.client;
 
 /* CREATE TABLE webim_histories (
  * 	`id` int(11) unsigned NOT NULL AUTO_INCREMENT,

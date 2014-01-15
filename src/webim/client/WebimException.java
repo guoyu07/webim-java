@@ -19,7 +19,7 @@
  * under the License.
  */
 
-package webim;
+package webim.client;
 
 @SuppressWarnings("serial")
 public class WebimException extends Exception {
