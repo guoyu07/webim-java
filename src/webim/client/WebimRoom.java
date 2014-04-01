@@ -1,5 +1,5 @@
 /*
- * WebimGroup.java
+ * WebimRoom.java
  *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -26,7 +26,7 @@ package webim.client;
  * @author Ery Lee <ery.lee at gmail.com>
  * @since 1.0
  */
-public class WebimGroup {
+public class WebimRoom {
 
 	/**
 	 * 群组id
@@ -71,7 +71,7 @@ public class WebimGroup {
 	 * @param nick
 	 *            群组昵称
 	 */
-	public WebimGroup(String id, String nick) {
+	public WebimRoom(String id, String nick) {
 		this.id = id;
 		this.nick = nick;
 	}

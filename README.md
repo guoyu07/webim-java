@@ -1,18 +1,20 @@
 
-Webim-java
+WebIM-java
 ==========
 
-webim java sdk 5.2
+WebIM Java SDK for NexTalk.IM
 
-Depends
-=======
+Requires
+========
+
+Java 1.6+
 
 lib/org.json-20120521.jar
 
 Dist Jar
 ========
 
-dist/webim-5.2.jar
+dist/webim.client-5.4-$date.jar
 
 API
 ===
@@ -21,7 +23,7 @@ WebimClient
 ------------------
 	WebimEndpoint ep = new WebimEndpoint("uid1", "user1");
 
-	WebimClient client = new WebimClient(ep, "localhost", "public", "localhost", 8000);
+	WebimClient client = new WebimClient(ep, "domain", "apikey", "localhost", 8000);
 
 Online
 ------
@@ -30,15 +32,15 @@ Online
 	buddyIds.add("uid1");
 	buddyIds.add("uid2");
 
-	List<String> groupIds = new ArrayList<String>();
-	groupIds.add("grp1");
-	groupIds.add("grp2");
+	List<String> roomIds = new ArrayList<String>();
+	roomIds.add("room1");
+	roomIds.add("room2");
 
-	JSONObject rt = client.online(buddyIds, groupIds);
+	Map<String,Object> rt = client.online(buddyIds, roomIds);
 
 
 Offline
--------	
+-------
 
 	client.offline()
 
@@ -46,13 +48,13 @@ Offline
 Publish Message
 ---------------
 
-	client.publish(new WebimStatus("uid2", "typing", "User2 is typing"));
+	client.publish(new WebimMessage("uid2", "User3", "hahaha", "", 1292832.183);
 
 Publish Status
 --------------
 
 	client.publish(new WebimStatus("uid2", "typing", "User2 is typing"));
-	
+
 Publish Presence
 ----------------
 
@@ -64,22 +66,20 @@ Push Message
 
 	client.push("uid3", new WebimMessage("uid2", "User3", "hahaha", "", 1292832.183));
 
-Presences
+Read Presences
 ---------
 
 	client.presences(buddyIds);
 
-Members
+Read Room Members
 -------
-	
-	JSONArray members = client.members("grp1");
+
+	JSONObject members = client.members("room1");
 
 
-developer
+Author
 =========
 
 http://nextalk.im
 
 详见javadoc
-
-

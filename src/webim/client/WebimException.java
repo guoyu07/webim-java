@@ -34,5 +34,9 @@ public class WebimException extends Exception {
 	public int getCode() {
 		return code;
 	}
+	
+	public String toString() {
+		return String.format("%d %s", code, this.getMessage());
+	}
 
 }

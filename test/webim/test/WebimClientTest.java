@@ -2,8 +2,8 @@ package webim.test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.After;
 import org.junit.Before;
@@ -21,7 +21,7 @@ public class WebimClientTest {
 	
 	private List<String> buddyIds;
 	
-	private List<String> groupIds;
+	private List<String> roomIds;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -32,9 +32,9 @@ public class WebimClientTest {
 		buddyIds.add("uid1");
 		buddyIds.add("uid2");
 		
-		groupIds = new ArrayList<String>();
-		groupIds.add("grp1");
-		groupIds.add("grp2");
+		roomIds = new ArrayList<String>();
+		roomIds.add("room1");
+		roomIds.add("room2");
 	}
 
 	@After
@@ -43,32 +43,32 @@ public class WebimClientTest {
 
 	@Test
 	public void testOnline() throws Exception {
-		JSONObject rt = client.online(buddyIds, groupIds);
+		Map<String, Object> rt =  client.online(buddyIds, roomIds);
 		System.out.println(rt);
 	}
 
 	@Test
 	public void testOffline() throws Exception{
-		JSONObject rt = client.online(buddyIds, groupIds);
+		Map<String, Object> rt = client.online(buddyIds, roomIds);
 		System.out.println(rt);
 		client.offline();
 	}
 
 	@Test
 	public void testPublishWebimPresence() throws Exception {
-		client.online(buddyIds, groupIds);
+		client.online(buddyIds, roomIds);
 		client.publish(new WebimPresence("away", "Away"));
 	}
 
 	@Test
 	public void testPublishWebimStatus() throws Exception{
-		client.online(buddyIds, groupIds);
+		client.online(buddyIds, roomIds);
 		client.publish(new WebimStatus("uid2", "typing", "User2 is typing"));
 	}
 
 	@Test
 	public void testPublishWebimMessage() throws Exception {
-		client.online(buddyIds, groupIds);
+		client.online(buddyIds, roomIds);
 		client.publish(new WebimMessage("uid2", "User1", "hahaha", "", 1292832.183));
 	}
 	
@@ -79,27 +79,29 @@ public class WebimClientTest {
 	
 	@Test
 	public void testPresences() throws Exception {
-		client.online(buddyIds, groupIds);
+		client.online(buddyIds, roomIds);
 		System.out.println(client.presences(buddyIds));
 	}
 
 	@Test
 	public void testMembers() throws Exception {
-		client.online(buddyIds, groupIds);
-		JSONArray members = client.members("grp1");
+		client.online(buddyIds, roomIds);
+		JSONObject members = client.members("room1");
+		System.out.println(members);
+		members = client.members("room3");
 		System.out.println(members);
 	}
 
 	@Test
 	public void testJoin() throws Exception {
-		client.online(buddyIds, groupIds);
-		JSONObject rtObj = client.join("grp1");
+		client.online(buddyIds, roomIds);
+		JSONObject rtObj = client.join("room1");
 		System.out.print(rtObj);
 	}
 
 	@Test
 	public void testLeave() throws Exception {
-		client.online(buddyIds, groupIds);
+		client.online(buddyIds, roomIds);
 	}
 
 }

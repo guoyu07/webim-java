@@ -23,19 +23,22 @@ package webim.client;
 import java.util.Map;
 import java.util.List;
 
-import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+
+import javax.xml.bind.DatatypeConverter;
 
 /**
  * WebimClient是与消息服务器通信接口，采用JSON/HTTP协议设计，接口包括:<br>
@@ -64,7 +67,7 @@ public class WebimClient {
 	 * 当前端点(用户)
 	 */
 	private WebimEndpoint ep;
-	
+
 	/**
 	 * 站点域名
 	 */
@@ -74,7 +77,7 @@ public class WebimClient {
 	 * 消息服务器通信APIKEY
 	 */
 	private String apikey;
-	
+
 	/**
 	 * 消息服务器内部通信地址
 	 */
@@ -92,13 +95,20 @@ public class WebimClient {
 
 	/**
 	 * 创建Clieng实例
-	 * @param ep 当前端点
-	 * @param domain 域名
-	 * @param apikey APIKEY
-	 * @param host 消息服务器地址
-	 * @param port 消息服务器端口
+	 * 
+	 * @param ep
+	 *            当前端点
+	 * @param domain
+	 *            域名
+	 * @param apikey
+	 *            APIKEY
+	 * @param host
+	 *            消息服务器地址
+	 * @param port
+	 *            消息服务器端口
 	 */
-	public WebimClient(WebimEndpoint ep, String domain, String apikey, String host, int port) {
+	public WebimClient(WebimEndpoint ep, String domain, String apikey,
+			String host, int port) {
 		this.ep = ep;
 		this.domain = domain;
 		this.apikey = apikey;
@@ -109,41 +119,11 @@ public class WebimClient {
 	/**
 	 * 设置与消息服务器通信令牌
 	 * 
-	 * @param ticket 通信令牌
+	 * @param ticket
+	 *            通信令牌
 	 */
 	public void setTicket(String ticket) {
 		this.ticket = ticket;
-	}
-
-	/**
-	 * 通知消息服务器用户上线
-	 * 
-	 * @param buddies 用户好友id列表
-	 * @param groups 用户群组id列表
-	 * 
-	 * @return JSONObject 成功返回JSON对象
-	 * @throws WebimException 失败返回异常
-	 */
-	public JSONObject online(List<String> buddies, List<String> groups)
-			throws WebimException {
-		Map<String, String> data = newData();
-		data.put("groups", this.listJoin(",", groups));
-		data.put("buddies", this.listJoin(",", buddies));
-		data.put("name", ep.getId());
-		data.put("nick", ep.getNick());
-		data.put("status", ep.getStatus());
-		data.put("show", ep.getShow());
-		try {
-			String body = httpost("/presences/online", data);
-			JSONObject json = new JSONObject(body);
-			setTicket(json.getString("ticket"));
-			return json;
-		} catch (WebimException e) {
-			throw e;
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new WebimException(500, e.getMessage());
-		}
 	}
 
 	/**
@@ -157,16 +137,63 @@ public class WebimClient {
 
 	/**
 	 * 端点
+	 * 
 	 * @return Endpoint
 	 */
 	public WebimEndpoint getEndpoint() {
 		return ep;
 	}
-	
+
+	/**
+	 * 通知消息服务器用户上线
+	 * 
+	 * @param buddies
+	 *            用户好友id列表
+	 * @param rooms
+	 *            用户群组id列表
+	 * 
+	 * @return Map<String,Object> 成功返回Map对象，存放连接(connection)、现场列表(presences)等信息。
+	 * @throws WebimException
+	 *             失败返回异常
+	 */
+	public Map<String, Object> online(List<String> buddies, List<String> rooms)
+			throws WebimException {
+		Map<String, String> data = newData();
+		data.put("rooms", this.listJoin(",", rooms));
+		data.put("buddies", this.listJoin(",", buddies));
+		data.put("name", ep.getId());
+		data.put("nick", ep.getNick());
+		data.put("status", ep.getStatus());
+		data.put("show", ep.getShow());
+		try {
+			String body = httpost("/presences/online", data);
+			JSONObject json = new JSONObject(body);
+			setTicket(json.getString("ticket"));
+			Map<String, String> conn = new HashMap<String, String>();
+			conn.put("ticket", json.getString("ticket"));
+			conn.put("domain", this.domain);
+			conn.put("jsonpd", json.getString("jsonpd"));
+			conn.put("server", json.getString("jsonpd"));
+			if (json.has("websocket")) conn.put("websocket", json.getString("websocket"));		
+			if (json.has("mqtt")) conn.put("mqtt", json.getString("mqtt"));			
+			Map<String, Object> rtData = new HashMap<String, Object>();
+			rtData.put("success", true);
+			rtData.put("connection", conn);
+			rtData.put("presences", json2Map(json.getJSONObject("presences")));
+			return rtData;
+		} catch (WebimException e) {
+			throw e;
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new WebimException(500, e.getMessage());
+		}
+	}
+
 	/**
 	 * 通知消息服务器下线
 	 * 
-	 * @return JSONObject "{'status': 'ok'}" or "{'status': 'error', 'message': 'blabla'}"
+	 * @return JSONObject "{'status': 'ok'}" or
+	 *         "{'status': 'error', 'message': 'blabla'}"
 	 * @throws WebimException
 	 */
 	public JSONObject offline() throws WebimException {
@@ -185,9 +212,11 @@ public class WebimClient {
 
 	/**
 	 * 向消息服务器转发现场(Presence)
-	 *  
-	 * @param presence 现场
-	 * @return JSONObject "{'status': 'ok'}" or "{'status': 'error', 'message': 'blabla'}"
+	 * 
+	 * @param presence
+	 *            现场
+	 * @return JSONObject "{'status': 'ok'}" or
+	 *         "{'status': 'error', 'message': 'blabla'}"
 	 * @throws WebimException
 	 */
 	public JSONObject publish(WebimPresence presence) throws WebimException {
@@ -208,8 +237,10 @@ public class WebimClient {
 	/**
 	 * 向消息服务器转发状态(Status)
 	 * 
-	 * @param status 状态
-	 * @return JSONObject "{'status': 'ok'}" or "{'status': 'error', 'message': 'blabla'}"
+	 * @param status
+	 *            状态
+	 * @return JSONObject "{'status': 'ok'}" or
+	 *         "{'status': 'error', 'message': 'blabla'}"
 	 * @throws WebimException
 	 */
 	public JSONObject publish(WebimStatus status) throws WebimException {
@@ -230,8 +261,10 @@ public class WebimClient {
 	/**
 	 * 向消息服务器转发即时消息(Message)
 	 * 
-	 * @param message 即时消息
-	 * @return JSONObject "{'status': 'ok'}" or "{'status': 'error', 'message': 'blabla'}"
+	 * @param message
+	 *            即时消息
+	 * @return JSONObject "{'status': 'ok'}" or
+	 *         "{'status': 'error', 'message': 'blabla'}"
 	 * @throws WebimException
 	 */
 	public JSONObject publish(WebimMessage message) throws WebimException {
@@ -247,15 +280,18 @@ public class WebimClient {
 			throw new WebimException(500, e.getMessage());
 		}
 	}
-	
+
 	/**
 	 * 向消息服务器直接推送即时消息(Message)，无需登录获取ticket。
 	 * 
-	 * @param message 即时消息
-	 * @return JSONObject "{'status': 'ok'}" or "{'status': 'error', 'message': 'blabla'}"
+	 * @param message
+	 *            即时消息
+	 * @return JSONObject "{'status': 'ok'}" or
+	 *         "{'status': 'error', 'message': 'blabla'}"
 	 * @throws WebimException
 	 */
-	public JSONObject push(String from, WebimMessage message) throws WebimException {
+	public JSONObject push(String from, WebimMessage message)
+			throws WebimException {
 		Map<String, String> data = newData();
 		data.put("from", from);
 		message.feed(data);
@@ -273,9 +309,9 @@ public class WebimClient {
 	/**
 	 * 从消息服务器读取多多用户现场(Presence)信息
 	 * 
-	 * @param ids 用户id列表
-	 * @return JsonObject对象，例子:
-	 *     {"uid1": "available", "uid2": "away"}
+	 * @param ids
+	 *            用户id列表
+	 * @return JsonObject对象，例子: {"uid1": "available", "uid2": "away"}
 	 * 
 	 * @exception WebimException
 	 */
@@ -292,20 +328,22 @@ public class WebimClient {
 			throw new WebimException(500, e.getMessage());
 		}
 	}
-	
+
 	/**
 	 * 向消息服务器请求群组在线成员信息
 	 * 
-	 * @param grpid 群组id
-	 * @return member 成员列表
+	 * @param room
+	 *            群组id
+	 * @return presences, 成员现场状态
 	 * @throws WebimException
 	 */
-	public JSONArray members(String grpid) throws WebimException {
+	public JSONObject members(String room) throws WebimException {
 		Map<String, String> data = newData();
-		data.put("group", grpid);
+		data.put("room", room);
 		try {
-			String body = httpget("/group/members", data);
-			return new JSONArray(body);
+			String uri = String.format("/rooms/%s/members", room);
+			String body = httpget(uri, data);
+			return new JSONObject(body);
 		} catch (WebimException e) {
 			throw e;
 		} catch (Exception e) {
@@ -317,16 +355,18 @@ public class WebimClient {
 	/**
 	 * 通知消息服务器用户加入群组
 	 * 
-	 * @param grpid 群组id
-	 * @return JSONObject "{'id': grpid, 'count': '0'}"
+	 * @param room
+	 *            群组id
+	 * @return JSONObject "{'id': room, 'count': '0'}"
 	 * @throws WebimException
 	 */
-	public JSONObject join(String grpid) throws WebimException {
+	public JSONObject join(String room) throws WebimException {
 		Map<String, String> data = newData();
 		data.put("nick", ep.getNick());
-		data.put("group", grpid);
+		data.put("room", room);
 		try {
-			String body = httpost("/group/join", data);
+			String uri = String.format("/rooms/%s/join", room);
+			String body = httpost(uri, data);
 			JSONObject respObj = new JSONObject(body);
 			return respObj;
 		} catch (WebimException e) {
@@ -340,16 +380,19 @@ public class WebimClient {
 	/**
 	 * 通知消息服务器用户离开群组
 	 * 
-	 * @param grpid 群组id
-	 * @return JSONObject "{'status': 'ok'}" or "{'status': 'error', 'message': 'blabla'}"
+	 * @param room
+	 *            群组id
+	 * @return JSONObject "{'status': 'ok'}" or
+	 *         "{'status': 'error', 'message': 'blabla'}"
 	 * @throws WebimException
 	 */
-	public JSONObject leave(String grpid) throws WebimException {
+	public JSONObject leave(String room) throws WebimException {
 		Map<String, String> data = newData();
 		data.put("nick", ep.getNick());
-		data.put("group", grpid);
+		data.put("room", room);
 		try {
-			String body = httpost("/group/leave", data);
+			String uri = String.format("/rooms/%s/leave", room);
+			String body = httpost(uri, data);
 			return new JSONObject(body);
 		} catch (WebimException e) {
 			throw e;
@@ -358,7 +401,7 @@ public class WebimClient {
 			throw new WebimException(500, e.getMessage());
 		}
 	}
-	
+
 	private String httpget(String path, Map<String, String> params)
 			throws Exception {
 		URL url;
@@ -367,6 +410,8 @@ public class WebimClient {
 			url = new URL(apiurl(path) + "?" + encodeData(params));
 			conn = (HttpURLConnection) url.openConnection();
 			conn.setRequestMethod("GET");
+			
+			
 			initConn(conn);
 			conn.connect();
 			return readResonpse(conn);
@@ -375,7 +420,6 @@ public class WebimClient {
 				conn.disconnect();
 			}
 		}
-
 	}
 
 	private String httpost(String path, Map<String, String> data)
@@ -402,7 +446,8 @@ public class WebimClient {
 				wr.writeBytes(urlParameters);
 				wr.flush();
 			} finally {
-				if(wr != null) wr.close();
+				if (wr != null)
+					wr.close();
 			}
 			return readResonpse(conn);
 		} finally {
@@ -412,10 +457,13 @@ public class WebimClient {
 		}
 	}
 
-	private void initConn(HttpURLConnection conn) {
+	private void initConn(HttpURLConnection conn) throws UnsupportedEncodingException {
 		conn.setUseCaches(false);
 		conn.setDoInput(true);
 		conn.setDoOutput(true);
+		String basicAuth = DatatypeConverter.printBase64Binary(
+				(this.domain + ":" + this.apikey).getBytes("UTF-8"));
+		conn.setRequestProperty ("Authorization", "Basic " + basicAuth);
 	}
 
 	private String readResonpse(HttpURLConnection conn) throws IOException,
@@ -428,15 +476,16 @@ public class WebimClient {
 		BufferedReader rd = null;
 		StringBuffer response = new StringBuffer();
 		try {
-			rd = new BufferedReader(new InputStreamReader(
-					conn.getInputStream()));
+			rd = new BufferedReader(
+					new InputStreamReader(conn.getInputStream()));
 			String line;
 			while ((line = rd.readLine()) != null) {
 				response.append(line);
 			}
-			//System.out.println(response.toString());
+			// System.out.println(response.toString());
 		} finally {
-			if(rd != null) rd.close();
+			if (rd != null)
+				rd.close();
 		}
 		return response.toString();
 	}
@@ -446,7 +495,7 @@ public class WebimClient {
 		data.put("version", APIVSN);
 		data.put("domain", domain);
 		data.put("apikey", apikey);
-		if(ticket != null) {
+		if (ticket != null) {
 			data.put("ticket", ticket);
 		}
 		return data;
@@ -463,16 +512,16 @@ public class WebimClient {
 		return listJoin("&", list);
 	}
 
-	private String listJoin(String sep, List<String> groups) {
+	private String listJoin(String sep, List<String> list) {
 		boolean first = true;
 		StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < groups.size(); i++) {
+		for (int i = 0; i < list.size(); i++) {
 			if (first) {
-				sb.append(groups.get(i));
+				sb.append(list.get(i));
 				first = false;
 			} else {
 				sb.append(sep);
-				sb.append(groups.get(i));
+				sb.append(list.get(i));
 			}
 		}
 		return sb.toString();
@@ -484,5 +533,17 @@ public class WebimClient {
 		}
 		return String.format("http://%s:%d/%s%s", host, port, APIVSN, path);
 	}
+	
+	private Map<String, String> json2Map(JSONObject json) throws JSONException {
+		Map<String, String> map = new HashMap<String, String>();
+		@SuppressWarnings("unchecked")
+		Iterator<String> it = json.keys();
+		while (it.hasNext()) {
+			String key = it.next();
+			map.put(key, json.getString(key));
+		}
+		return map;
+	}
+
 
 }
