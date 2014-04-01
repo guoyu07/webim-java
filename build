@@ -2,5 +2,5 @@
 
 date=`date +"%Y%m%d"`
 
-jar cfm dist/webim-5.2-$date.jar MANIFEST.MF -C bin/ .
+jar cfm dist/webim.client-5.4-$date.jar MANIFEST.MF -C bin/ .
 
