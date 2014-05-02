@@ -36,6 +36,7 @@ public class WebimMessage {
 	private String nick;
 	private String to;
 	private String type = "chat";
+	private boolean offline = false;
 
 	public WebimMessage(String to, String nick, String body,
 			String style, double timestamp) {
@@ -86,6 +87,14 @@ public class WebimMessage {
 	public String toString() {
 		return String.format("Message(to=%s, body=%s, style=%s, timestamp=%d",
 				to,body, style, timestamp);
+	}
+
+	public boolean isOffline() {
+		return offline;
+	}
+
+	public void setOffline(boolean offline) {
+		this.offline = offline;
 	}
 
 }
