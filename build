@@ -1,6 +1,7 @@
 #!/bin/sh
 
 date=`date +"%Y%m%d"`
+vsn=`git tag | tail -1`
 
-jar cfm dist/webim.client-5.4-$date.jar MANIFEST.MF -C bin/ .
+jar cfm dist/webim.client-$vsn-$date.jar MANIFEST.MF -C bin/ .
 
