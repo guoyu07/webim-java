@@ -50,11 +50,6 @@ public class WebimEndpoint {
 	private String show = "unavailable";
 
 	/**
-	 * 状态最近更新时间
-	 */
-	private String status_time = "";
-
-	/**
 	 * 端点(用户)主页
 	 */
 	private String url = "";
@@ -62,12 +57,17 @@ public class WebimEndpoint {
 	/**
 	 * 端点(用户)图片
 	 */
-	private String pic_url = "";
+	private String avatar = "";
 
 	/**
 	 * 端点状态
 	 */
 	private String status = "";
+
+	/**
+	 * 状态最近更新时间
+	 */
+	private String status_time = "";
 
 	/**
 	 * 创建端点对象
@@ -82,7 +82,7 @@ public class WebimEndpoint {
 		this.setNick(nick);
 		this.setStatus_time("");
 		this.setUrl("");
-		this.setPic_url("");
+		this.setAvatar("");
 	}
 
 	/**
@@ -101,6 +101,38 @@ public class WebimEndpoint {
 	 */
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	/**
+	 * 端点(用户)昵称
+	 * 
+	 * @return 端点(用户)昵称
+	 */
+	public String getNick() {
+		return nick;
+	}
+
+	/**
+	 * 设置端点(用户)昵称
+	 * 
+	 * @param nick
+	 *            端点(用户)昵称
+	 */
+	public void setNick(String nick) {
+		this.nick = nick;
+	}
+
+	/**
+	 * 用户presence
+	 * 
+	 * @return
+	 */
+	public String getPresence() {
+		return presence;
+	}
+
+	public void setPresence(String presence) {
+		this.presence = presence;
 	}
 
 	/**
@@ -163,18 +195,18 @@ public class WebimEndpoint {
 	 * 
 	 * @return 端点(用户)图片
 	 */
-	public String getPic_url() {
-		return pic_url;
+	public String getAvatar() {
+		return avatar;
 	}
 
 	/**
 	 * 设置端点(用户)图片
 	 * 
-	 * @param pic_url
+	 * @param avatar
 	 *            端点(用户)图片
 	 */
-	public void setPic_url(String pic_url) {
-		this.pic_url = pic_url;
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
 	}
 
 	/**
@@ -196,36 +228,9 @@ public class WebimEndpoint {
 		this.status = status;
 	}
 
-	/**
-	 * 端点(用户)昵称
-	 * 
-	 * @return 端点(用户)昵称
-	 */
-	public String getNick() {
-		return nick;
-	}
-
-	/**
-	 * 设置端点(用户)昵称
-	 * 
-	 * @param nick
-	 *            端点(用户)昵称
-	 */
-	public void setNick(String nick) {
-		this.nick = nick;
-	}
-
 	public String toString() {
 		return String.format("Endpoint(id=%s, nick=%s, presence=%s, show=%s",
 				id, nick, presence, show);
-	}
-
-	public String getPresence() {
-		return presence;
-	}
-
-	public void setPresence(String presence) {
-		this.presence = presence;
 	}
 
 }

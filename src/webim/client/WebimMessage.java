@@ -30,13 +30,13 @@ import java.util.Map;
  */
 public class WebimMessage {
 
-	private double timestamp;
 	private String style = "";
 	private String body;
 	private String nick;
 	private String to;
 	private String type = "chat";
 	private boolean offline = false;
+	private double timestamp;
 
 	public WebimMessage(String to, String nick, String body,
 			String style, double timestamp) {

@@ -56,12 +56,17 @@ public class WebimRoom {
 	/**
 	 * 群组图片
 	 */
-	private String pic_url = "";
+	private String avatar = "";
 
 	/**
 	 * 是否临时讨论组
 	 */
 	private boolean temporary = false;
+	
+	/**
+	 * 是否屏蔽讨论组
+	 */
+	private boolean blocked = false;
 
 	/**
 	 * 创建群组实例
@@ -166,20 +171,25 @@ public class WebimRoom {
 	 * 
 	 * @return 群组图片
 	 */
-	public String getPic_url() {
-		return pic_url;
+	public String getAvatar() {
+		return avatar;
 	}
 
 	/**
 	 * 设置群组图片
 	 * 
-	 * @param pic_url
+	 * @param avatar
 	 *            群组图片
 	 */
-	public void setPic_url(String pic_url) {
-		this.pic_url = pic_url;
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
 	}
 
+	/**
+	 * 是否临时讨论组?
+	 * 
+	 * @return 
+	 */
 	public boolean isTemporary() {
 		return temporary;
 	}
@@ -188,8 +198,22 @@ public class WebimRoom {
 		this.temporary = temporary;
 	}
 
+	/**
+	 * 是否已屏蔽？
+	 * @return
+	 */
+	public boolean isBlocked() {
+		return blocked;
+	}
+
+	public void setBlocked(boolean blocked) {
+		this.blocked = blocked;
+	}
+	
 	public String toString() {
 		return String.format("Group(id=%s, nick=%s, count=%d", id, nick, count);
 	}
 
 }
+
+
