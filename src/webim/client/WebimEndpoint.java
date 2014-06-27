@@ -50,6 +50,11 @@ public class WebimEndpoint {
 	private String show = "unavailable";
 
 	/**
+	 * 分组 
+	 */
+	private String group = "friend";
+	
+	/**
 	 * 端点(用户)主页
 	 */
 	private String url = "";
@@ -231,6 +236,14 @@ public class WebimEndpoint {
 	public String toString() {
 		return String.format("Endpoint(id=%s, nick=%s, presence=%s, show=%s",
 				id, nick, presence, show);
+	}
+
+	public String getGroup() {
+		return group;
+	}
+
+	public void setGroup(String group) {
+		this.group = group;
 	}
 
 }
