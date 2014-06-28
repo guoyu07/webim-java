@@ -32,6 +32,10 @@ public class WebimNotification {
 	
 	private String link;
 	
+	public WebimNotification() {
+		
+	}
+	
 	public WebimNotification(String text, String link) {
 		this.text = text;
 		this.link = link;

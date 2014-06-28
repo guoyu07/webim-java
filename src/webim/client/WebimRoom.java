@@ -68,6 +68,10 @@ public class WebimRoom {
 	 */
 	private boolean blocked = false;
 
+	public WebimRoom() {
+		
+	}
+	
 	/**
 	 * 创建群组实例
 	 * 
@@ -90,6 +94,13 @@ public class WebimRoom {
 		return id;
 	}
 
+	/**
+	 * 设置群组id 
+	 */
+	public void setId(String id) {
+		this.id = id;
+	}
+	
 	/**
 	 * 群组昵称
 	 * 

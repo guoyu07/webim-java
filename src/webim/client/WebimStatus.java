@@ -31,7 +31,9 @@ import java.util.Map;
 public class WebimStatus {
 
 	private String to;
+	
 	private String show;
+	
 	private String status;
 
 	public WebimStatus() {

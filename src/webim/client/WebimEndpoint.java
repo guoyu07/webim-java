@@ -73,6 +73,12 @@ public class WebimEndpoint {
 	 * 状态最近更新时间
 	 */
 	private String status_time = "";
+	
+	/**
+	 * 默认构造函数
+	 */
+	public WebimEndpoint() {
+	}
 
 	/**
 	 * 创建端点对象

@@ -50,6 +50,13 @@ public class WebimMember {
 	private String show = "unavailable";
 	
 	/**
+	 * 缺省构造函数
+	 */
+	public WebimMember() {
+		
+	}
+	
+	/**
 	 * 创建成员实例
 	 * 
 	 * @param id

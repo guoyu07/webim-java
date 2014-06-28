@@ -37,7 +37,11 @@ public class WebimMessage {
 	private String type = "chat";
 	private boolean offline = false;
 	private double timestamp;
-
+	
+	public WebimMessage() {
+		
+	}
+	
 	public WebimMessage(String to, String nick, String body,
 			String style, double timestamp) {
 		this.to = to;

@@ -64,10 +64,9 @@ public class WebimHistory {
 	private String body;
 	private String style = "";
 	private double timestamp;
-	private Date createdat;
+	private Date created;
 
 	public WebimHistory() {
-
 	}
 
 	public WebimHistory(long id) {
@@ -146,12 +145,12 @@ public class WebimHistory {
 		this.timestamp = timestamp;
 	}
 
-	public Date getCreatedat() {
-		return createdat;
+	public Date getCreated() {
+		return created;
 	}
 
-	public void setCreatedat(Date createdat) {
-		this.createdat = createdat;
+	public void setCreated(Date created) {
+		this.created = created;
 	}
 
 	public String toString() {
