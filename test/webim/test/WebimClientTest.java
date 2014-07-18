@@ -26,7 +26,7 @@ public class WebimClientTest {
 	@Before
 	public void setUp() throws Exception {
 		WebimEndpoint ep = new WebimEndpoint("uid1", "user1");
-		client = new WebimClient(ep, "localhost", "public", "localhost", 8000);
+		client = new WebimClient(ep, "localhost", "public", "t.nextalk.im", 8000);
 
 		buddyIds = new ArrayList<String>();
 		buddyIds.add("uid1");

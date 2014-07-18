@@ -53,7 +53,6 @@ public class WebimMember {
 	 * 缺省构造函数
 	 */
 	public WebimMember() {
-		
 	}
 	
 	/**
@@ -78,6 +77,10 @@ public class WebimMember {
 		return id;
 	}
 
+	public void setId(String id) {
+		this.id = id;
+	}
+	
 	/**
 	 * 成员昵称
 	 * 
