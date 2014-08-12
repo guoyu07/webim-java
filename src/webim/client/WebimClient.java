@@ -320,6 +320,8 @@ public class WebimClient {
 		data.put("ids", listJoin(",", ids));
 		try {
 			String body = httpget("/presences", data);
+            //compatible with 5.4.1
+            if(body.startsWith("[")) { return new JSONObject("{}"); }
 			return new JSONObject(body);
 		} catch (WebimException e) {
 			throw e;
@@ -343,6 +345,8 @@ public class WebimClient {
 		try {
 			String uri = String.format("/rooms/%s/members", room);
 			String body = httpget(uri, data);
+            //compatible with 5.4.1
+            if(body.startsWith("[")) { return new JSONObject("{}"); }
 			return new JSONObject(body);
 		} catch (WebimException e) {
 			throw e;
@@ -410,8 +414,6 @@ public class WebimClient {
 			url = new URL(apiurl(path) + "?" + encodeData(params));
 			conn = (HttpURLConnection) url.openConnection();
 			conn.setRequestMethod("GET");
-			
-			
 			initConn(conn);
 			conn.connect();
 			return readResonpse(conn);
