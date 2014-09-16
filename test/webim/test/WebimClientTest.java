@@ -1,8 +1,8 @@
 package webim.test;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import org.json.JSONObject;
 import org.junit.After;
@@ -18,21 +18,22 @@ import webim.client.WebimStatus;
 public class WebimClientTest {
 
 	private WebimClient client;
-	
-	private List<String> buddyIds;
-	
-	private List<String> roomIds;
-	
+
+	private Set<String> buddyIds;
+
+	private Set<String> roomIds;
+
 	@Before
 	public void setUp() throws Exception {
 		WebimEndpoint ep = new WebimEndpoint("uid1", "user1");
-		client = new WebimClient(ep, "localhost", "public", "t.nextalk.im", 8000);
+		client = new WebimClient(ep, "localhost", "public", "t.nextalk.im",
+				8000);
 
-		buddyIds = new ArrayList<String>();
+		buddyIds = new HashSet<String>();
 		buddyIds.add("uid1");
 		buddyIds.add("uid2");
-		
-		roomIds = new ArrayList<String>();
+
+		roomIds = new HashSet<String>();
 		roomIds.add("room1");
 		roomIds.add("room2");
 	}
@@ -43,12 +44,12 @@ public class WebimClientTest {
 
 	@Test
 	public void testOnline() throws Exception {
-		Map<String, Object> rt =  client.online(buddyIds, roomIds);
+		Map<String, Object> rt = client.online(buddyIds, roomIds);
 		System.out.println(rt);
 	}
 
 	@Test
-	public void testOffline() throws Exception{
+	public void testOffline() throws Exception {
 		Map<String, Object> rt = client.online(buddyIds, roomIds);
 		System.out.println(rt);
 		client.offline();
@@ -61,7 +62,7 @@ public class WebimClientTest {
 	}
 
 	@Test
-	public void testPublishWebimStatus() throws Exception{
+	public void testPublishWebimStatus() throws Exception {
 		client.online(buddyIds, roomIds);
 		client.publish(new WebimStatus("uid2", "typing", "User2 is typing"));
 	}
@@ -69,14 +70,16 @@ public class WebimClientTest {
 	@Test
 	public void testPublishWebimMessage() throws Exception {
 		client.online(buddyIds, roomIds);
-		client.publish(new WebimMessage("uid2", "User1", "hahaha", "", 1292832.183));
+		client.publish(new WebimMessage("uid2", "User1", "hahaha", "",
+				1292832.183));
 	}
-	
-	//@Test 
+
+	// @Test
 	public void testPushMessage() throws Exception {
-		client.push("uid3", new WebimMessage("uid2", "User3", "hahaha", "", 1292832.183));
+		client.push("uid3", new WebimMessage("uid2", "User3", "hahaha", "",
+				1292832.183));
 	}
-	
+
 	@Test
 	public void testPresences() throws Exception {
 		client.online(buddyIds, roomIds);

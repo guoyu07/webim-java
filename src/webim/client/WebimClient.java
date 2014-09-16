@@ -21,7 +21,6 @@
 package webim.client;
 
 import java.util.Map;
-import java.util.List;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -34,9 +33,10 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
 
 import javax.xml.bind.DatatypeConverter;
 
@@ -156,11 +156,11 @@ public class WebimClient {
 	 * @throws WebimException
 	 *             失败返回异常
 	 */
-	public Map<String, Object> online(List<String> buddies, List<String> rooms)
+	public Map<String, Object> online(Set<String> buddies, Set<String> rooms)
 			throws WebimException {
 		Map<String, String> data = newData();
-		data.put("rooms", this.listJoin(",", rooms));
-		data.put("buddies", this.listJoin(",", buddies));
+		data.put("rooms", this.join(",", rooms));
+		data.put("buddies", this.join(",", buddies));
 		data.put("name", ep.getId());
 		data.put("nick", ep.getNick());
 		data.put("status", ep.getStatus());
@@ -174,8 +174,10 @@ public class WebimClient {
 			conn.put("domain", this.domain);
 			conn.put("jsonpd", json.getString("jsonpd"));
 			conn.put("server", json.getString("jsonpd"));
-			if (json.has("websocket")) conn.put("websocket", json.getString("websocket"));		
-			if (json.has("mqtt")) conn.put("mqtt", json.getString("mqtt"));			
+			if (json.has("websocket"))
+				conn.put("websocket", json.getString("websocket"));
+			if (json.has("mqtt"))
+				conn.put("mqtt", json.getString("mqtt"));
 			Map<String, Object> rtData = new HashMap<String, Object>();
 			rtData.put("success", true);
 			rtData.put("connection", conn);
@@ -315,13 +317,15 @@ public class WebimClient {
 	 * 
 	 * @exception WebimException
 	 */
-	public JSONObject presences(List<String> ids) throws WebimException {
+	public JSONObject presences(Set<String> ids) throws WebimException {
 		Map<String, String> data = newData();
-		data.put("ids", listJoin(",", ids));
+		data.put("ids", join(",", ids));
 		try {
 			String body = httpget("/presences", data);
-            //compatible with 5.4.1
-            if(body.startsWith("[")) { return new JSONObject("{}"); }
+			// compatible with 5.4.1
+			if (body.startsWith("[")) {
+				return new JSONObject("{}");
+			}
 			return new JSONObject(body);
 		} catch (WebimException e) {
 			throw e;
@@ -345,8 +349,10 @@ public class WebimClient {
 		try {
 			String uri = String.format("/rooms/%s/members", room);
 			String body = httpget(uri, data);
-            //compatible with 5.4.1
-            if(body.startsWith("[")) { return new JSONObject("{}"); }
+			// compatible with 5.4.1
+			if (body.startsWith("[")) {
+				return new JSONObject("{}");
+			}
 			return new JSONObject(body);
 		} catch (WebimException e) {
 			throw e;
@@ -459,13 +465,14 @@ public class WebimClient {
 		}
 	}
 
-	private void initConn(HttpURLConnection conn) throws UnsupportedEncodingException {
+	private void initConn(HttpURLConnection conn)
+			throws UnsupportedEncodingException {
 		conn.setUseCaches(false);
 		conn.setDoInput(true);
 		conn.setDoOutput(true);
-		String basicAuth = DatatypeConverter.printBase64Binary(
-				(this.domain + ":" + this.apikey).getBytes("UTF-8"));
-		conn.setRequestProperty ("Authorization", "Basic " + basicAuth);
+		String basicAuth = DatatypeConverter.printBase64Binary((this.domain
+				+ ":" + this.apikey).getBytes("UTF-8"));
+		conn.setRequestProperty("Authorization", "Basic " + basicAuth);
 	}
 
 	private String readResonpse(HttpURLConnection conn) throws IOException,
@@ -504,26 +511,28 @@ public class WebimClient {
 	}
 
 	private String encodeData(Map<String, String> data) throws Exception {
-		List<String> list = new ArrayList<String>();
+		Set<String> list = new HashSet<String>();
 		Iterator<Map.Entry<String, String>> it = data.entrySet().iterator();
 		while (it.hasNext()) {
 			Map.Entry<String, String> pair = it.next();
 			list.add(pair.getKey() + "="
 					+ URLEncoder.encode(pair.getValue(), "utf-8"));
 		}
-		return listJoin("&", list);
+		return join("&", list);
 	}
 
-	private String listJoin(String sep, List<String> list) {
+	private String join(String sep, Set<String> ss) {
 		boolean first = true;
 		StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < list.size(); i++) {
+		Iterator<String> it = ss.iterator();
+		while (it.hasNext()) {
+			String s = it.next();
 			if (first) {
-				sb.append(list.get(i));
+				sb.append(s);
 				first = false;
 			} else {
 				sb.append(sep);
-				sb.append(list.get(i));
+				sb.append(s);
 			}
 		}
 		return sb.toString();
@@ -535,7 +544,7 @@ public class WebimClient {
 		}
 		return String.format("http://%s:%d/%s%s", host, port, APIVSN, path);
 	}
-	
+
 	private Map<String, String> json2Map(JSONObject json) throws JSONException {
 		Map<String, String> map = new HashMap<String, String>();
 		@SuppressWarnings("unchecked")
@@ -546,6 +555,5 @@ public class WebimClient {
 		}
 		return map;
 	}
-
 
 }
