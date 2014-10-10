@@ -19,7 +19,7 @@
  * under the License.
  */
 
-package webim.client;
+package webim.model;
 
 /* CREATE TABLE webim_histories (
  * 	`id` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -50,7 +50,7 @@ import java.util.Date;
 /**
  * Webim历史消息
  * 
- * @author Ery Lee <ery.lee @ gmail.com>
+ * @author Feng Lee <feng.lee@nextalk.im>
  * @since 1.0
  */
 public class WebimHistory {

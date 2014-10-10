@@ -18,14 +18,14 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package webim.client;
+package webim.model;
 
 import java.util.Map;
 
 /**
  * Webim即时消息对象
  * 
- * @author Ery Lee <ery.lee @ gmail.com>
+ * @author Feng Lee <feng.lee@nextalk.im>
  * @since 1.0
  */
 public class WebimMessage {

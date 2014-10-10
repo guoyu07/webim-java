@@ -1,5 +1,5 @@
 /*
- * WebimEndpoint.java
+ * WebimMenu.java
  *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -18,25 +18,58 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+package webim.model;
 
-package webim.client;
+/**
+ * Webim菜单条，显示在下面条幅右侧。
+ *  
+ * @author Feng Lee <feng.lee@nextalk.im>
+ * @since 1.0
+ */
+public class WebimMenu {
 
-@SuppressWarnings("serial")
-public class WebimException extends Exception {
+	private String title;
 
-	private int code;
+	private String icon;
+
+	private String link;
+
+	public WebimMenu() {
+		
+	}
+	public WebimMenu(String title, String icon, String link) {
+		this.title = title;
+		this.icon = icon;
+		this.link = link;
+	}
 	
-	public WebimException(int code, String status) {
-		super(status);
-		this.code = code;
+	public String getTitle() {
+		return title;
 	}
 
-	public int getCode() {
-		return code;
+	public void setTitle(String title) {
+		this.title = title;
 	}
-	
+
+	public String getIcon() {
+		return icon;
+	}
+
+	public void setIcon(String icon) {
+		this.icon = icon;
+	}
+
+	public String getLink() {
+		return link;
+	}
+
+	public void setLink(String link) {
+		this.link = link;
+	}
+
 	public String toString() {
-		return String.format("%d %s", code, this.getMessage());
+		return String.format("Menu(title=%s, icon=%s, link=%s)", title, icon,
+				link);
 	}
 
 }

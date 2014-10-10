@@ -18,12 +18,12 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package webim.client;
+package webim.model;
 
 /**
  * Webim群组成员
  * 
- * @author Ery Lee <ery.lee at gmail.com>
+ * @author Feng Lee <feng.lee@nextalk.im>
  * @since 5.4
  */
 

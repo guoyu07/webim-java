@@ -25,6 +25,12 @@ import java.util.Map;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import webim.model.WebimEndpoint;
+import webim.model.WebimException;
+import webim.model.WebimMessage;
+import webim.model.WebimPresence;
+import webim.model.WebimStatus;
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -53,7 +59,7 @@ import javax.xml.bind.DatatypeConverter;
  * <li>leave: 通知消息服务器有用户离开群组</li>
  * </ul>
  * 
- * @author Ery Lee <ery.lee @ gmail.com>
+ * @author Feng Lee <feng.lee@nextalk.im>
  * @since 1.0
  */
 public class WebimClient {
@@ -81,12 +87,14 @@ public class WebimClient {
 	/**
 	 * 消息服务器内部通信地址
 	 */
-	private String host;
+	private WebimCluster cluster;
+	
+	//private String host;
 
 	/**
 	 * 消息服务器端口
 	 */
-	private int port;
+	//private int port;
 
 	/**
 	 * 通信令牌，每online一次，消息服务器返回一个新令牌
@@ -107,13 +115,11 @@ public class WebimClient {
 	 * @param port
 	 *            消息服务器端口
 	 */
-	public WebimClient(WebimEndpoint ep, String domain, String apikey,
-			String host, int port) {
+	public WebimClient(WebimEndpoint ep, String domain, String apikey, WebimCluster cluster) {
 		this.ep = ep;
 		this.domain = domain;
 		this.apikey = apikey;
-		this.host = host;
-		this.port = port;
+		this.cluster = cluster;
 	}
 
 	/**
@@ -143,6 +149,23 @@ public class WebimClient {
 	public WebimEndpoint getEndpoint() {
 		return ep;
 	}
+
+	/**
+	 * 集群策略
+	 * 
+	 * @return 集群策略
+	 */
+	public WebimCluster getCluster() {
+		return cluster;
+	}
+
+	/**
+	 * 设置集群策略
+	 */
+	public void setCluster(WebimCluster cluster) {
+		this.cluster = cluster;
+	}
+
 
 	/**
 	 * 通知消息服务器用户上线
@@ -542,7 +565,7 @@ public class WebimClient {
 		if (!path.startsWith("/")) {
 			path = "/" + path;
 		}
-		return String.format("http://%s:%d/%s%s", host, port, APIVSN, path);
+		return String.format("http://%s/%s%s", cluster.getServer(ep), APIVSN, path);
 	}
 
 	private Map<String, String> json2Map(JSONObject json) throws JSONException {

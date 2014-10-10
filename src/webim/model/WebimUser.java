@@ -1,5 +1,5 @@
 /*
- * WebimNotification.java
+ * WebimEndpoint.java
  *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -18,47 +18,20 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package webim.client;
+package webim.model;
 
 /**
- * Webim通知对象。
+ * Webim用户
  * 
- * @author Ery Lee <ery.lee @ gmail.com>
- * @since 1.0
+ * @author Feng Lee <feng.lee@nextalk.im>
+ *
  */
-public class WebimNotification {
+public class WebimUser extends WebimEndpoint {
+	
+	public static final String TAG = "uid";
 
-	private String text;
-	
-	private String link;
-	
-	public WebimNotification() {
-		
-	}
-	
-	public WebimNotification(String text, String link) {
-		this.text = text;
-		this.link = link;
+	public WebimUser(String id, String nick) {
+		super(id, nick);
 	}
 
-	public String getText() {
-		return text;
-	}
-
-	public void setText(String text) {
-		this.text = text;
-	}
-
-	public String getLink() {
-		return link;
-	}
-
-	public void setLink(String link) {
-		this.link = link;
-	}
-	
-	public String toString() {
-		return String.format("Notification(text=%s, link=%s)", text, link);
-	}
-	
 }

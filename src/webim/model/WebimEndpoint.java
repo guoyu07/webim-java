@@ -19,12 +19,12 @@
  * under the License.
  */
 
-package webim.client;
+package webim.model;
 
 /**
  * 路由端点(用户)。即时消息路由端点，标识一个用户、访客、服务。
  * 
- * @author Ery Lee <ery.lee at gmail.com>
+ * @author Feng Lee <feng.lee@nextalk.im>
  * @since 1.0
  */
 public class WebimEndpoint {
@@ -32,7 +32,7 @@ public class WebimEndpoint {
 	/**
 	 * 端点标识，传递给消息服务器时，作为name(历史原因)
 	 */
-	private String id;
+	private final String id;
 
 	/**
 	 * 端点(用户)昵称
@@ -45,7 +45,7 @@ public class WebimEndpoint {
 	private String presence = "offline";
 
 	/**
-	 * 现场
+	 * 现场: available | away | chat | dnd | invisible | unavailable
 	 */
 	private String show = "unavailable";
 
@@ -57,12 +57,12 @@ public class WebimEndpoint {
 	/**
 	 * 端点(用户)主页
 	 */
-	private String url = "";
+	private String url = "#";
 
 	/**
 	 * 端点(用户)图片
 	 */
-	private String avatar = "";
+	private String avatar = "#";
 
 	/**
 	 * 端点状态
@@ -75,12 +75,6 @@ public class WebimEndpoint {
 	private String status_time = "";
 	
 	/**
-	 * 默认构造函数
-	 */
-	public WebimEndpoint() {
-	}
-
-	/**
 	 * 创建端点对象
 	 * 
 	 * @param id
@@ -89,11 +83,11 @@ public class WebimEndpoint {
 	 *            端点昵称(用户昵称)
 	 */
 	public WebimEndpoint(String id, String nick) {
-		this.setId(id);
+		this.id = id;
 		this.setNick(nick);
 		this.setStatus_time("");
 		this.setUrl("");
-		this.setAvatar("");
+		this.setAvatar("#");
 	}
 
 	/**
@@ -103,15 +97,6 @@ public class WebimEndpoint {
 	 */
 	public String getId() {
 		return id;
-	}
-
-	/**
-	 * 设置端点
-	 * 
-	 * @param id
-	 */
-	public void setId(String id) {
-		this.id = id;
 	}
 
 	/**
@@ -239,11 +224,6 @@ public class WebimEndpoint {
 		this.status = status;
 	}
 
-	public String toString() {
-		return String.format("Endpoint(id=%s, nick=%s, presence=%s, show=%s",
-				id, nick, presence, show);
-	}
-
 	public String getGroup() {
 		return group;
 	}
@@ -252,4 +232,23 @@ public class WebimEndpoint {
 		this.group = group;
 	}
 
+	@Override
+	public int hashCode() {
+		return id.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof WebimEndpoint) {
+			return id.equals( ((WebimEndpoint)obj).id );
+		}
+		return false;
+	}
+	
+	public String toString() {
+		return String.format("Endpoint(id=%s, nick=%s, presence=%s, show=%s, avatar=%s)",
+				id, nick, presence, show, avatar);
+	}
+
+	
 }

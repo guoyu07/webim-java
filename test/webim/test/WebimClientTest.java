@@ -10,10 +10,12 @@ import org.junit.Before;
 import org.junit.Test;
 
 import webim.client.WebimClient;
-import webim.client.WebimEndpoint;
-import webim.client.WebimMessage;
-import webim.client.WebimPresence;
-import webim.client.WebimStatus;
+import webim.client.WebimCluster;
+import webim.model.WebimEndpoint;
+import webim.model.WebimMessage;
+import webim.model.WebimPresence;
+import webim.model.WebimStatus;
+import webim.model.WebimUser;
 
 public class WebimClientTest {
 
@@ -23,11 +25,19 @@ public class WebimClientTest {
 
 	private Set<String> roomIds;
 
+	private WebimCluster cluster = new WebimCluster() {
+
+		@Override
+		public String getServer(WebimEndpoint ep) {
+			return "t.nextalk.im:8000";
+		}
+		
+	};
+	
 	@Before
 	public void setUp() throws Exception {
-		WebimEndpoint ep = new WebimEndpoint("uid1", "user1");
-		client = new WebimClient(ep, "localhost", "public", "t.nextalk.im",
-				8000);
+		WebimEndpoint ep = new WebimUser("uid1", "user1");
+		client = new WebimClient(ep, "localhost", "public", cluster);
 
 		buddyIds = new HashSet<String>();
 		buddyIds.add("uid1");
