@@ -37,6 +37,11 @@ public class WebimRoom {
 	 * 群组昵称
 	 */
 	private String nick;
+	
+	/**
+	 * 群组创建者
+	 */
+	private String owner;
 
 	/**
 	 * 群组首页
@@ -217,14 +222,35 @@ public class WebimRoom {
 		return blocked;
 	}
 
+	/**
+	 * 屏蔽群组
+	 * 
+	 * @param blocked
+	 */
 	public void setBlocked(boolean blocked) {
 		this.blocked = blocked;
 	}
-	
-	public String toString() {
-		return String.format("Group(id=%s, nick=%s, count=%d", id, nick, count);
+
+	/**
+	 * 群组创建者
+	 * 
+	 * @return 群组创建者
+	 */
+	public String getOwner() {
+		return owner;
 	}
 
+	/**
+	 * 设置群组创建者
+	 * @param owner
+	 */
+	public void setOwner(String owner) {
+		this.owner = owner;
+	}
+	
+	public String toString() {
+		return String.format("Room(id=%s, nick=%s, url=%s", id, nick, url);
+	}
 }
 
 

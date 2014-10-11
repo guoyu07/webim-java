@@ -26,7 +26,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import webim.model.WebimEndpoint;
-import webim.model.WebimException;
 import webim.model.WebimMessage;
 import webim.model.WebimPresence;
 import webim.model.WebimStatus;
