@@ -55,6 +55,7 @@ public class WebimVisitor extends WebimEndpoint {
 
 	public WebimVisitor(String id, String nick) {
 		super(TAG + ":" + id, nick);
+		setGroup("visitor");
 	}
 
 
