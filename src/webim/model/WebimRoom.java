@@ -28,7 +28,7 @@ import java.io.Serializable;
  * @author Feng Lee <feng.lee@nextalk.im>
  * @since 1.0
  */
-public class WebimRoom  implements Serializable {
+public class WebimRoom implements Serializable {
 
 	private static final long serialVersionUID = -244456273285620258L;
 
