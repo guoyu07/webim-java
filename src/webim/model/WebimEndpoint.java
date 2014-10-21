@@ -21,13 +21,17 @@
 
 package webim.model;
 
+import java.io.Serializable;
+
 /**
  * 路由端点(用户)。即时消息路由端点，标识一个用户、访客、服务。
  * 
  * @author Feng Lee <feng.lee@nextalk.im>
  * @since 1.0
  */
-public class WebimEndpoint {
+public class WebimEndpoint implements Serializable {
+
+	private static final long serialVersionUID = 6063479713105077582L;
 
 	/**
 	 * 端点标识，传递给消息服务器时，作为name(历史原因)

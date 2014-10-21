@@ -30,6 +30,8 @@ import java.util.Date;
  */
 public class WebimVisitor extends WebimEndpoint {
 	
+	private static final long serialVersionUID = 3933432640482361862L;
+
 	public static final String TAG = "vid";
 	
 	/**

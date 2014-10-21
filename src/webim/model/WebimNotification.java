@@ -20,13 +20,20 @@
  */
 package webim.model;
 
+import java.io.Serializable;
+
 /**
  * Webim通知对象。
  * 
  * @author Feng Lee <feng.lee@nextalk.im>
  * @since 1.0
  */
-public class WebimNotification {
+public class WebimNotification implements Serializable  {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8956132112292078424L;
 
 	private String text;
 	

@@ -20,13 +20,17 @@
  */
 package webim.model;
 
+import java.io.Serializable;
+
 /**
  * Webim群组对象
  * 
  * @author Feng Lee <feng.lee@nextalk.im>
  * @since 1.0
  */
-public class WebimRoom {
+public class WebimRoom  implements Serializable {
+
+	private static final long serialVersionUID = -244456273285620258L;
 
 	/**
 	 * 群组id

@@ -29,6 +29,8 @@ package webim.model;
  */
 public class WebimRobot extends WebimEndpoint {
 
+	private static final long serialVersionUID = 6087298698057543417L;
+
 	public final static String TAG = "robot";
 
 	private WebimAskProvider provider = null;

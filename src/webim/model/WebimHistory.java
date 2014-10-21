@@ -21,6 +21,7 @@
 
 package webim.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -29,8 +30,10 @@ import java.util.Date;
  * @author Feng Lee <feng.lee@nextalk.im>
  * @since 1.0
  */
-public class WebimHistory {
+public class WebimHistory implements Serializable {
 
+	private static final long serialVersionUID = 5542586338785656369L;
+	
 	private long id;
 	private String type = "chat";
 	private int send = 1;

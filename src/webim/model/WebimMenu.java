@@ -20,13 +20,17 @@
  */
 package webim.model;
 
+import java.io.Serializable;
+
 /**
  * Webim菜单条，显示在下面条幅右侧。
  *  
  * @author Feng Lee <feng.lee@nextalk.im>
  * @since 1.0
  */
-public class WebimMenu {
+public class WebimMenu implements Serializable  {
+
+	private static final long serialVersionUID = -2462525928245844839L;
 
 	private String title;
 

@@ -28,6 +28,8 @@ package webim.model;
  */
 public class WebimUser extends WebimEndpoint {
 	
+	private static final long serialVersionUID = 3247528666563794357L;
+	
 	public static final String TAG = "uid";
 
 	public WebimUser(String id, String nick) {

@@ -20,6 +20,7 @@
  */
 package webim.model;
 
+import java.io.Serializable;
 import java.util.Map;
 
 /**
@@ -28,8 +29,9 @@ import java.util.Map;
  * @author Feng Lee <feng.lee@nextalk.im>
  * @since 1.0
  */
-public class WebimMessage {
+public class WebimMessage implements Serializable  {
 
+	private static final long serialVersionUID = 8918394769384228521L;
 	private String style = "";
 	private String body;
 	private String nick;

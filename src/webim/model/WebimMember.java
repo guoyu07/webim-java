@@ -20,6 +20,8 @@
  */
 package webim.model;
 
+import java.io.Serializable;
+
 /**
  * Webim群组成员
  * 
@@ -27,7 +29,9 @@ package webim.model;
  * @since 5.4
  */
 
-public class WebimMember {
+public class WebimMember implements Serializable  {
+
+	private static final long serialVersionUID = -503914446507776668L;
 
 	/**
 	 * 成员id

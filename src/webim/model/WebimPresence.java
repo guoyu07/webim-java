@@ -20,6 +20,7 @@
  */
 package webim.model;
 
+import java.io.Serializable;
 import java.util.Map;
 
 /**
@@ -28,7 +29,9 @@ import java.util.Map;
  * @author Feng Lee <feng.lee@nextalk.im>
  * @since 1.0 
  */
-public class WebimPresence {
+public class WebimPresence implements Serializable  {
+
+	private static final long serialVersionUID = -7598684165143561338L;
 
 	private String show;
 	
