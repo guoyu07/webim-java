@@ -208,7 +208,7 @@ public class WebimRoom implements Serializable {
 	/**
 	 * 是否临时讨论组?
 	 * 
-	 * @return 
+	 * @return true 临时讨论组
 	 */
 	public boolean isTemporary() {
 		return temporary;
@@ -220,7 +220,7 @@ public class WebimRoom implements Serializable {
 
 	/**
 	 * 是否已屏蔽？
-	 * @return
+	 * @return true 已屏蔽
 	 */
 	public boolean isBlocked() {
 		return blocked;

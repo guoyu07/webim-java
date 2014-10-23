@@ -125,7 +125,7 @@ public class WebimEndpoint implements Serializable {
 	/**
 	 * 用户presence
 	 * 
-	 * @return
+	 * @return presence
 	 */
 	public String getPresence() {
 		return presence;

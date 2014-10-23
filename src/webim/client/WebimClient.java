@@ -109,10 +109,8 @@ public class WebimClient {
 	 *            域名
 	 * @param apikey
 	 *            APIKEY
-	 * @param host
-	 *            消息服务器地址
-	 * @param port
-	 *            消息服务器端口
+	 * @param cluster
+	 *            消息服务器集群提供者
 	 */
 	public WebimClient(WebimEndpoint ep, String domain, String apikey, WebimCluster cluster) {
 		this.ep = ep;
