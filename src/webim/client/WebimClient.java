@@ -490,7 +490,7 @@ public class WebimClient {
 		conn.setUseCaches(false);
 		conn.setDoInput(true);
 		conn.setDoOutput(true);
-		String basicAuth = DatatypeConverter.printBase64Binary((this.domain
+		String basicAuth = Base64.encodeBytes((this.domain
 				+ ":" + this.apikey).getBytes("UTF-8"));
 		conn.setRequestProperty("Authorization", "Basic " + basicAuth);
 	}
