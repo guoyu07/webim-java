@@ -32,6 +32,10 @@ import java.util.Map;
 public class WebimMessage implements Serializable  {
 
 	private static final long serialVersionUID = 8918394769384228521L;
+	/**
+	 * Unique id for message
+	 */
+	private String id;
 	private String style = "";
 	private String body;
 	private String nick;

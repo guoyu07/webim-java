@@ -1,4 +1,9 @@
 
+5.8 (2014/12/20)
+----------------
+add 'Base64' class to replace 'DatatypeConverter.printBase64Binary'
+WebimMessage add 'id' property
+
 5.7.2 (2014/10/21)
 ----------------
 * webim.model.* implements Serializable 
