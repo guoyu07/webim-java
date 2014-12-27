@@ -34,6 +34,11 @@ public class WebimMember implements Serializable  {
 	private static final long serialVersionUID = -503914446507776668L;
 
 	/**
+	 * 所属房间(讨论组)
+	 */
+	private String room; 
+	
+	/**
 	 * 成员id
 	 */
 	private String id;
@@ -137,6 +142,14 @@ public class WebimMember implements Serializable  {
 	 */
 	public void setShow(String show) {
 		this.show = show;
+	}
+
+	public String getRoom() {
+		return room;
+	}
+
+	public void setRoom(String room) {
+		this.room = room;
 	}
 
 }
